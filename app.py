@@ -16,11 +16,11 @@ def main():
     st.title("Interview Practice App")
 
     with st.container(height=500, border=True):
-        for message in gpt_helper.messages:
+        for i, message in enumerate(gpt_helper.messages):
             if message["role"] == "assistant":
-                messageUi(message['content'], is_user=False)
+                messageUi(message['content'], is_user=False, key=i)
             else:
-                messageUi(message['content'], is_user=True)
+                messageUi(message['content'], is_user=True, key=i)
 
     st.session_state.spinner_container = st.empty()
     
