@@ -1,6 +1,6 @@
 import streamlit as st
 from dotenv import load_dotenv
-import controller as controller
+import gpt_helper as gpt_helper
 from streamlit_chat import message as messageUi
 
 load_dotenv()
@@ -16,7 +16,7 @@ def main():
     st.title("Interview Practice App")
 
     with st.container(height=500, border=True):
-        for message in controller.messages:
+        for message in gpt_helper.messages:
             if message["role"] == "assistant":
                 messageUi(message['content'], is_user=False)
             else:
@@ -37,7 +37,7 @@ def handle_input():
     if st.session_state.message_input.strip():
         with st.session_state.spinner_container:
             with st.spinner('Processing your message...'):
-                controller.on_prompt_entered(st.session_state.message_input)
+                gpt_helper.on_prompt_entered(st.session_state.message_input)
                 st.session_state.message_input = ""
 
 if __name__ == "__main__":
